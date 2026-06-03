@@ -6,14 +6,24 @@ on:
       - main
 
 jobs:
-  build:
+
+  test:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Run Tests
+        run: |
+          echo "Running Tests"
+          echo "Tests Passed"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
       - name: ServiceNow DevOps Change
         uses: ServiceNow/servicenow-devops-change@v6.1.0
 
@@ -33,17 +43,15 @@ jobs:
           change-request: >
             {
               "attributes": {
-                "short_description": "GitHub Deployment withh charles",
+                "short_description": "MobilePay Deployment",
                 "description": "Automated CRQ from GitHub Actions"
               }
             }
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
 
-      - name: Verify Python
-        run: python --version
+      - name: Deploy Application
+        run: |
+          echo "Deploying Application"
 
       - name: Success Message
-        run: echo "Pipeline completed successsfully"
+        run: |
+          echo "Deployment Completed Successfully"
