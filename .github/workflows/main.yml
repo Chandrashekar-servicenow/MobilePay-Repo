@@ -34,7 +34,7 @@ jobs:
 
           context-github: ${{ toJSON(github) }}
 
-          job-name: 'deploy'
+          job-name: 'Deploy Stage'
 
           devops-integration-user-name: ${{ secrets.SN_USERNAME }}
 
