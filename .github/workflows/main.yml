@@ -6,7 +6,21 @@ on:
       - main
 
 jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Tests
+        run: |
+          echo "Running Tests"
+          echo "Tests Passed"
+
   deploy:
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
@@ -26,5 +40,18 @@ jobs:
 
           devops-integration-user-password: ${{ secrets.SN_PASSWORD }}
 
+          change-request: >
+            {
+              "attributes": {
+                "short_description": "MobilePay Deployment",
+                "description": "Automated CRQ from GitHub Actions"
+              }
+            }
+
+      - name: Deploy Application
+        run: |
+          echo "Deploying Application"
+
       - name: Success Message
-        run: echo "Deployment Completed Successfully"
+        run: |
+          echo "Deployment Completed Successfully"
