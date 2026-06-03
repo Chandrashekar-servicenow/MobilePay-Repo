@@ -43,7 +43,7 @@ jobs:
           change-request: >
             {
               "attributes": {
-                "short_description": "GitHub Deployment in Demo Caall",
+                "short_description": "GitHub Deployment in Demo Call",
                 "description": "Automated CRQ from GitHub Actions"
               }
             }
